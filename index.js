@@ -17,10 +17,7 @@ const PORT = 5000;
 app.use(express.json())
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://flat-management-system-frontend.vercel.app"
-  ],
+ origin: [process.env.DEV_ORIGIN, process.env.PROD_ORIGIN],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
