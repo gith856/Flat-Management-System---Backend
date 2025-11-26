@@ -17,7 +17,7 @@ const PORT = 5000;
 app.use(express.json())
 
 app.use(cors({
-    origin:"",
+    origin:process.env.FRONTEND_URL,
     methods:["GET","POST","PUT","DELETE"],
     allowedHeaders:["Content-Type","auth-token"]
 }));
