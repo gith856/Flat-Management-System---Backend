@@ -42,9 +42,14 @@ export const RegisterController = async(req,res)=>{
 }
 
 export const LoginController = async(req,res)=>{
+    console.log("fchwydwyf");
+    
     const {email,password} = req.body;
+    console.log(email);
+        
 
-    if(!email || !password){
+  try{
+      if(!email || !password){
         return res.status(400).json({message:"Please fill all the fields"})
     }
 
@@ -58,7 +63,7 @@ export const LoginController = async(req,res)=>{
         return res.status(400).json({message:"User Not Found"})
     }
 
-    if(email === process.env.Admin_EMAIL && password === process.env.ADMIN_PASSWORD){
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
         const token = await jwt.sign({id:user.id,role:user.role},process.env.JWT_SECRET,{expiresIn:'1d'})
         return res.status(200).json({
             message:"Admin LoggedIn Successfully",
@@ -79,5 +84,13 @@ export const LoginController = async(req,res)=>{
         token,
          user
     })
+  }
+
+  catch(err)
+  {
+    console.log(err);
+    res.status(500).json("Internal server error")
+    
+  }
 }
 
