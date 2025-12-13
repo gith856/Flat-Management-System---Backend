@@ -11,18 +11,16 @@ const __dirname = path.dirname(__filename)
 
 const app = express();
 
-const PORT=5000;
+const PORT= process.env.PORT || 5000;
 
 app.use(express.json())
 
 app.use(cors({
      origin:[ "http://localhost:5173",
-            "https://flat-management-system-frontend.vercel.app/"  
+            "https://flat-management-system-frontend.vercel.app"  
      ],
-    methods:["GET","PUT","POST","DELETE","OPTIONS"],
-    allowedHeaders:["Content-Type","auth-token"]
+    credentials:true
 }));
-
 
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 
