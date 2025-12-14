@@ -1,4 +1,4 @@
-import cloudinary from "../config/cloudinary.js";
+
 import { prismaClient } from "../routes/index.js"
 
 export const createFlatController = async (req, res) => {
