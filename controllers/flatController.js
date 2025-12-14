@@ -1,3 +1,4 @@
+import cloudinary from "../config/cloudinary.js";
 import { prismaClient } from "../routes/index.js"
 
 export const createFlatController = async (req, res) => {
@@ -15,6 +16,14 @@ export const createFlatController = async (req, res) => {
 
         const baseUrl = `${req.protocol}://${req.get("host")}`;
         const images = req.files.map(f => `${baseUrl}/uploads/${userId}/images/${f.filename}`);
+
+        // const images = [];
+        // for(const file of req.files){
+        //     const result = await cloudinary.uploader.upload(file.path,{
+        //         folder:"flats"
+        //     });
+        //     images.push(result.secure_url);
+        // }
 
         const flat = await prismaClient.flat.create({
             data: {
